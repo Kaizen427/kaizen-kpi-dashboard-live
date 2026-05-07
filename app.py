@@ -90,7 +90,7 @@ def resolve_bearer_token() -> tuple[str, str]:
         return lark_token, "lark"
 
     # 2. Fall back to manually-stored TWALK_TOKEN
-    stored = st.secrets.get("TWALK_TOKEN", "")
+    stored = st.secrets.get("TWALK_TOKEN", "").replace("\n", "").replace(" ", "").strip()
     if stored and token_works(stored):
         return stored, "secret"
 
